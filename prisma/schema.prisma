@@ -10,16 +10,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model WatchListItem {
-  id      String @id @default(cuid())
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String
-  movieId String
-  @@unique([userId, movieId])
+// creates a User model and used the 
+// @@map(name: "users") attribute to change 
+// the table name to users
+model User{
+  @@map(name: "users")
+
+  // The @default(uuid()) attribute sets a default 
+  // UUID value for the ID
+  id String  @id @default(uuid())
+  name String  @db.VarChar(255)
+  email String @unique
+  photo String? @default("default.png")
+  verified Boolean? @default(false) 
+  
+  password String
+  role RoleEnumType? @default(user)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  provider String?
 }
 
-model User {
-  id        String          @id @default(cuid())
-  email     String?
-  watchList WatchListItem[]
+enum RoleEnumType {
+  user
+  admin
 }

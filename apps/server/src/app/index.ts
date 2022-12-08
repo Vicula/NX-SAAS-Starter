@@ -1,7 +1,8 @@
 /**
  ==============================================================================
  * @file   server/app/index.ts
- * @brief   server's main app file used for creating the express api
+ * @brief   server's main app file used for creating the express app 
+ *          and tRPC routes
  ==============================================================================
  * @attention
  *
@@ -43,6 +44,7 @@ export type Context = inferAsyncReturnType<typeof createContext>;
  * initalizes tRPC server
  */
 const t = initTRPC.context<Context>().create();
+export type TRPCServer = typeof t;
 
 /**
  * tRPC router used to manage all 
@@ -66,28 +68,35 @@ const appRouter = t.router({
 export type AppRouter = typeof appRouter;
 
 /**
- * configure the Express tRPC server
+ * Here we export a function to settup the express
+ * app and hook it up to the trpc API
  */
-const app = express();
-if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
-
-app.use(
-    cors({
-        origin: [environment.origin, "http://localhost:3000"],
-        credentials: true,
-    })
-);
-app.use(
-    "/api/trpc",
-    trpcExpress.createExpressMiddleware({
-        router: appRouter,
-        createContext,
-    })
-);
-
-const port = environment.port;
-
 const BootstrapServer = () => {
+    /**
+     * configure the Express tRPC server
+     */
+    const app = express();
+    if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
+
+    app.use(
+        cors({
+            origin: [environment.origin, "http://localhost:3000"],
+            credentials: true,
+        })
+    );
+    /**
+     * setup the trpc API on the express app 
+     */
+    app.use(
+        "/api/trpc",
+        trpcExpress.createExpressMiddleware({
+            router: appRouter,
+            createContext,
+        })
+    );
+
+    const port = environment.port;
+
     app.listen(port, () => {
         console.log(`🚀 Server listening on port ${port}`);
 
@@ -96,4 +105,8 @@ const BootstrapServer = () => {
     });
 }
 
+/** 
+ * Then we export the function
+ * for controlled creation
+ */
 export default BootstrapServer;

@@ -8,6 +8,7 @@ type UserDataType = {
   hasUser: boolean;
   username: string;
 };
+
 export const AuthUserContext = React.createContext<
   | {
       userData: UserDataType;
