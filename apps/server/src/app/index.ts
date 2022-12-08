@@ -23,7 +23,8 @@ import { inferAsyncReturnType, initTRPC } from "@trpc/server";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import redisClient from "./utils/redis";
 import { environment } from '../environments/environment';
-import connectDB from "./utils/prisma";
+import connectDB, { prisma } from "./utils/prisma";
+import useUserRoutes from "./routes/users";
 
 dotenv.config({ path: path.join(__dirname, "./.env") });
 
@@ -35,7 +36,7 @@ dotenv.config({ path: path.join(__dirname, "./.env") });
 const createContext = ({
     req,
     res,
-}: trpcExpress.CreateExpressContextOptions) => ({ req, res });
+}: trpcExpress.CreateExpressContextOptions) => ({ req, res, prisma });
 
 export type Context = inferAsyncReturnType<typeof createContext>;
 
@@ -54,6 +55,7 @@ export type TRPCServer = typeof t;
  *  - Subscription endpoints: used to subscribe to data over WebSockets.
  */
 const appRouter = t.router({
+    ...useUserRoutes(t),
     sayHello: t.procedure.query(async () => {
         const message = await redisClient.get("tRPC");
         return { message };

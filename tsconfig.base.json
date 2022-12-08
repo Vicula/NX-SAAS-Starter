@@ -17,7 +17,8 @@
     "typeRoots": ["node_modules/@types", "typings"],
     "paths": {
       "@nx-saas/data-library": ["libs/data-library/src/index.ts"],
-      "@nx-saas/component-library": ["libs/component-library/src/index.ts"]
+      "@nx-saas/component-library": ["libs/component-library/src/index.ts"],
+      "@nx-saas/server": ["apps/server/src/main.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,5 +1,6 @@
 import React from 'react';
 import { AuthProvider } from './AuthProvider';
+import { TRPCProvider } from './tRPCProvider';
 
 export interface GlobalProviderProps {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ export interface GlobalProviderProps {
 export function Provider({ children }: GlobalProviderProps) {
   return (
     <AuthProvider>
-          {children}
+      <TRPCProvider>{children}</TRPCProvider>
     </AuthProvider>
   );
 }
