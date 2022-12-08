@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+  },
+  "references": [
+    {
+      "path": "./tsconfig.app.json",
+      "composite": true
+    },
+    {
+      "path": "./tsconfig.spec.json",
+      "composite": true
+    }
+  ]
+}

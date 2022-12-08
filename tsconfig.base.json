@@ -14,8 +14,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "typeRoots": ["node_modules/@types", "typings"],
     "paths": {
-      "@nx-saas/trpc-server": ["libs/trpc-server/src/index.ts"],
       "component-library": ["libs/component-library/src/index.ts"]
     }
   },
