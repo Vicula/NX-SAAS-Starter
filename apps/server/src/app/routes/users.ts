@@ -16,6 +16,7 @@
 import type { TRPCServer } from "../index";
 import { createUserSchema, loginUserSchema } from "@nx-saas/data-library";
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
+import type { User } from "@prisma/client";
 import * as trpc from '@trpc/server'
 
 const useUserRoutes = (t: TRPCServer) => {
@@ -23,7 +24,7 @@ const useUserRoutes = (t: TRPCServer) => {
         Users: t.router({
             RegisterUser: t.procedure
                 .input(createUserSchema)
-                .mutation(async ({ ctx, input }) => {
+                .mutation(async ({ ctx, input }): Promise<User | undefined> => {
                     const { email, password } = input
 
                     try {
@@ -53,7 +54,7 @@ const useUserRoutes = (t: TRPCServer) => {
                 }),
             FetchUser: t.procedure
                 .input(loginUserSchema)
-                .query(async ({ ctx, input }) => {
+                .mutation(async ({ ctx, input }): Promise<User | undefined> => {
                     const { email } = input;
 
                     const user = await ctx.prisma.user.findUnique({

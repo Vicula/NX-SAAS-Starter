@@ -1,3 +1,16 @@
+/**
+ ==============================================================================
+ * @file   AuthProvider
+ * @brief  where we provide context to the active user's permissions
+ ==============================================================================
+ * @attention
+ *
+ * Copyright (c) Victor Carpenter D.B.A., [Some Company], LLC 
+ * All rights reserved.
+ *
+ ==============================================================================
+ */
+
 import React, { Dispatch, SetStateAction } from 'react';
 
 export interface AuthProviderProps {
@@ -17,9 +30,7 @@ export const AuthUserContext = React.createContext<
   | undefined
 >(undefined);
 
-export function AuthProvider({
-  children,
-}: AuthProviderProps) {
+export function AuthProvider({ children }: AuthProviderProps) {
   const [userData, setUser] = React.useState({ hasUser: false, username: '' });
 
   return (
@@ -38,9 +49,7 @@ export const useAuthUser = () => {
   const context = React.useContext(AuthUserContext);
 
   if (context === undefined) {
-    throw new Error(
-      'useAuthUser must be used within a AuthProvider'
-    );
+    throw new Error('useAuthUser must be used within a AuthProvider');
   }
 
   return context;

@@ -10,7 +10,8 @@
     "db:migrate": "npx prisma migrate dev --name user-entity --create-only && yarn prisma generate",
     "db:push": "npx prisma db push",
     "build": "nx build --configuration=production ",
-    "test": "nx test"
+    "test": "nx test",
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider nx storybook component-library"
   },
   "private": true,
   "devDependencies": {

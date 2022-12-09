@@ -1,7 +1,27 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.login {
+  padding-top: 10rem;
+  display: flex;
+  width: 33%;
+  margin: auto;
+  justify-content: center;
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .buttonCont {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 2rem;
+
+    button {
+      display: inline-block;
+      text-decoration: none;
+      border: 0;
+      padding: 0.5rem 1rem;
+      min-width: 5rem;
+    }
+  }
+}

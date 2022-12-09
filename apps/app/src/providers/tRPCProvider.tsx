@@ -1,3 +1,16 @@
+/**
+ ==============================================================================
+ * @file   tRPCProvider
+ * @brief  we provide the tRPC context to the rest of the app here
+ ==============================================================================
+ * @attention
+ *
+ * Copyright (c) Victor Carpenter D.B.A., [Some Company], LLC 
+ * All rights reserved.
+ *
+ ==============================================================================
+ */
+
 import { useState } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -10,6 +23,10 @@ export interface tRPCProviderProps {
   children: React.ReactNode;
 }
 
+/**
+ * 
+ * Here are creating the provider for the tRPC client
+ */
 export function TRPCProvider({ children }: tRPCProviderProps) {
   const [queryClient] = useState(
     () =>

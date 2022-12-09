@@ -21,26 +21,26 @@ export enum UserRoleTypes {
     admin
 }
 
-export const createUserSchema = yup.object({
+export const createUserSchema = yup.object().shape({
     password: yup.string().required(),
     email: yup.string().email().required(),
 })
 
-export const createUserOutputSchema = yup.object({
+export const createUserOutputSchema = yup.object().shape({
     password: yup.string(),
     email: yup.string().email(),
 })
 
-export type CreateUserInput = yup.TypeOf<typeof createUserSchema>
+export type CreateUserInput = yup.Asserts<typeof createUserSchema>
 
-export const loginUserSchema = yup.object({
+export const loginUserSchema = yup.object().shape({
     password: yup.string().required(),
     email: yup.string().email().required(),
 })
 
-export const loginUserOutputSchema = yup.object({
+export const loginUserOutputSchema = yup.object().shape({
     password: yup.string(),
     email: yup.string().email(),
 })
 
-export type LoginUserInput = yup.TypeOf<typeof createUserSchema>
+export type LoginUserInput = yup.Asserts<typeof createUserSchema>
